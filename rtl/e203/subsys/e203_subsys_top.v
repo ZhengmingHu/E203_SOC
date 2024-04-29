@@ -235,6 +235,46 @@ module e203_subsys_top(
   output  io_pads_jtag_TRST_n_o_pue,
   output  io_pads_jtag_TRST_n_o_ds,
 
+  //  AXI Interface ////////////////////////////////////////////////
+    output wire                         expl_axi_arvalid           ,
+    input  wire                         expl_axi_arready           ,
+    output wire        [32-1: 0]        expl_axi_araddr            ,
+    output wire        [   3: 0]        expl_axi_arcache           ,
+    output wire        [   2: 0]        expl_axi_arprot            ,
+    output wire        [   1: 0]        expl_axi_arlock            ,
+    output wire        [   1: 0]        expl_axi_arburst           ,
+    output wire        [   3: 0]        expl_axi_arlen             ,
+    output wire        [   2: 0]        expl_axi_arsize            ,
+
+    output wire                         expl_axi_awvalid           ,
+    input  wire                         expl_axi_awready           ,
+    output wire        [32-1: 0]        expl_axi_awaddr            ,
+    output wire        [   3: 0]        expl_axi_awcache           ,
+    output wire        [   2: 0]        expl_axi_awprot            ,
+    output wire        [   1: 0]        expl_axi_awlock            ,
+    output wire        [   1: 0]        expl_axi_awburst           ,
+    output wire        [   3: 0]        expl_axi_awlen             ,
+    output wire        [   2: 0]        expl_axi_awsize            ,
+
+    input  wire                         expl_axi_rvalid            ,
+    output wire                         expl_axi_rready            ,
+    input  wire        [32-1: 0]        expl_axi_rdata             ,
+    input  wire        [   1: 0]        expl_axi_rresp             ,
+    input  wire                         expl_axi_rlast             ,
+
+    output wire                         expl_axi_wvalid            ,
+    input  wire                         expl_axi_wready            ,
+    output wire        [32-1: 0]        expl_axi_wdata             ,
+    output wire        [(32/8)-1: 0]    expl_axi_wstrb             ,
+    output wire                         expl_axi_wlast             ,
+
+    input  wire                         expl_axi_bvalid            ,
+    output wire                         expl_axi_bready            ,
+    input  wire        [   1: 0]        expl_axi_bresp             ,
+  
+    output                              aclk                       ,
+    output                              aresetn                    ,
+
   input  test_iso_override,
   input  test_mode 
   );
@@ -473,6 +513,48 @@ module e203_subsys_top(
     .sysmem_icb_rsp_ready  (sysmem_icb_rsp_ready),
     .sysmem_icb_rsp_err    (sysmem_icb_rsp_err  ),
     .sysmem_icb_rsp_rdata  (sysmem_icb_rsp_rdata),
+
+
+    // AXI Interface ///////////////////////////////////////////////
+    .expl_axi_arvalid                   (expl_axi_arvalid          ),
+    .expl_axi_arready                   (expl_axi_arready          ),
+    .expl_axi_araddr                    (expl_axi_araddr           ),
+    .expl_axi_arcache                   (expl_axi_arcache          ),
+    .expl_axi_arprot                    (expl_axi_arprot           ),
+    .expl_axi_arlock                    (expl_axi_arlock           ),
+    .expl_axi_arburst                   (expl_axi_arburst          ),
+    .expl_axi_arlen                     (expl_axi_arlen            ),
+    .expl_axi_arsize                    (expl_axi_arsize           ),
+
+    .expl_axi_awvalid                   (expl_axi_awvalid          ),
+    .expl_axi_awready                   (expl_axi_awready          ),
+    .expl_axi_awaddr                    (expl_axi_awaddr           ),
+    .expl_axi_awcache                   (expl_axi_awcache          ),
+    .expl_axi_awprot                    (expl_axi_awprot           ),
+    .expl_axi_awlock                    (expl_axi_awlock           ),
+    .expl_axi_awburst                   (expl_axi_awburst          ),
+    .expl_axi_awlen                     (expl_axi_awlen            ),
+    .expl_axi_awsize                    (expl_axi_awsize           ),
+
+    .expl_axi_rvalid                    (expl_axi_rvalid           ),
+    .expl_axi_rready                    (expl_axi_rready           ),
+    .expl_axi_rdata                     (expl_axi_rdata            ),
+    .expl_axi_rresp                     (expl_axi_rresp            ),
+    .expl_axi_rlast                     (expl_axi_rlast            ),
+
+    .expl_axi_wvalid                    (expl_axi_wvalid           ),
+    .expl_axi_wready                    (expl_axi_wready           ),
+    .expl_axi_wdata                     (expl_axi_wdata            ),
+    .expl_axi_wstrb                     (expl_axi_wstrb            ),
+    .expl_axi_wlast                     (expl_axi_wlast            ),
+
+    .expl_axi_bvalid                    (expl_axi_bvalid           ),
+    .expl_axi_bready                    (expl_axi_bready           ),
+    .expl_axi_bresp                     (expl_axi_bresp            ),
+
+
+    .aclk                               (aclk                      ),
+    .aresetn                            (aresetn                   ),
 
     .test_mode     (test_mode), 
     .ls_clk        (lfextclk), 
